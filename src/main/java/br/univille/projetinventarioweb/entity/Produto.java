@@ -22,7 +22,7 @@ public class Produto {
     private String obs;
 
     public long getId() {
-        return id;
+        return id;    
     }
     public void setId(long id) {
         this.id = id;

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!---link faz o CSS
+//script faz o javascript-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        
+        <nav th:replace="layout :: menu">(menu)</nav>
+        <main class="container">
+
+            <h1>Produto</h1>
+            <form th:action="@{/produto}" method="POST" th:object="${produto}">
+                <div class="form-grup">
+                    <label for="txtmodelo">Modelo</label>
+                    <input 
+                    id="txtmodelo"
+                    th:field="*{modelo}"
+                    class="form-control"
+                    type="text">
+                </div>
+                <div class="form-grup">
+                    <label for="txtobs">Observação</label>
+                    <input 
+                    id="txtobs"
+                    th:field="*{obs}"
+                    class="form-control"
+                    type="text">
+                </div>
+            
+        <button type="submit" class="form-control">Enviar</button>
+
+
+            </form>
+        
+        </main>
+        <div th:include="layout :: footer">(footer)</div>
+    </body>
+</html>
