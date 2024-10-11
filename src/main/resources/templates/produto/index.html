@@ -10,16 +10,22 @@
 
             <h1>Produto</h1>
             <a href="/produto/novo" class="btn btn-primary">Novo Produto</a>
-            <table class="table">
+            <table class="table" id="tabelaproduto">
                 <thead>
                     <th>Modelo</th>
                     <th>Observação</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <tr th:each="umProduto : ${listaProduto}">
                         <td th:text="${umProduto.modelo}"></td>
                         <td th:text="${umProduto.obs}"></td>
-
+                        <td>
+                            <a th:href="@{'/produto/alterar/' +${umProduto.id}}" class="btn btn-warning">Alterar</a>
+                            <button class="btn btn-danger js-delete"
+                            th:data-id="${umProduto.id}">
+                            Excluir</button>
+                        </td>
 
                     </tr>
                 </tbody>
@@ -27,5 +33,24 @@
         
         </main>
         <div th:include="layout :: footer">(footer)</div>
+        <script th:src="@{/scriptproduto.js}"></script>
     </body>
 </html>
+
+<div class="modal" tabindex="-1" id="modalproduto">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir Produto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Deseja Excluir Produto</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnsim">Confirmar</button>
+        </div>
+      </div> 
+    </div>
+  </div>

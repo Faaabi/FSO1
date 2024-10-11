@@ -27,17 +27,29 @@ public class ProdutoServiceImpl implements ProdutoService{
         return produto;
     }
 
-    @Override
-    public Produto delete(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
+
 
     @Override
     public Produto getById(long id) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+       
+        var retorno = repository.findById(id);
+        if(retorno.isPresent())
+            return retorno.get();
+        return null;
+     }
+     @Override
+     public Produto delete(long id) {
+        var retorno = repository.findById(id);
+        if(retorno.isPresent()){
+            repository.deleteById(id);
+            return retorno.get();
+        }
+        return null;
+    }
+
+
     }
 
     
-}
+

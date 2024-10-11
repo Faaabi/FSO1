@@ -15,7 +15,7 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //gera um identity do id
     private long id;
 
-    @Column(length = 1000, nullable = false) //deixa o campo obrigatorio
+    @Column(length = 1000) //deixa o campo obrigatorio
     private String modelo;
     
     @Column(length = 1000)
