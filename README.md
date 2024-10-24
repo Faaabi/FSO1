@@ -19,6 +19,5 @@ O **Sistema de Gerenciamento de Inventário** é uma aplicação web projetada p
 
 ### Diagrama de entidades
 
-![Diagrama casos de uso](https://github.com/user-attachments/assets/6b9d4673-602b-48c6-b0d7-835f99fed353)
+---![diagramUMLprojetoFSO](https://github.com/user-attachments/assets/99b52332-1956-4da4-98b5-1e0d78f5ad5d)
 
----
