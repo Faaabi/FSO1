@@ -1,10 +1,12 @@
 package br.univille.projetinventarioweb.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity// gera uma tabela BD
 
@@ -38,7 +40,17 @@ public class Produto {
     }
     public void setObs(String obs) {
         this.obs = obs;
-    }   
+    }  
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    public Componente componente;
+
+    public Componente getComponente() {
+        return componente;
+    }
+    public void setComponente(Componente componente) {
+        this.componente = componente;
+    }
+
 
     
 }
