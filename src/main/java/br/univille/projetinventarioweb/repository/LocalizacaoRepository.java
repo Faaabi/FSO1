@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import br.univille.projetinventarioweb.entity.Localizacao;
 
 @Repository
-public interface LocalizacaoRepository extends JpaRepository<Localizacao,Long>{
+public interface LocalizacaoRepository 
+    extends JpaRepository<Localizacao,Long>{
     
 }

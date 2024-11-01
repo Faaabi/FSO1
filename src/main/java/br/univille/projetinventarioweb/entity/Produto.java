@@ -50,6 +50,16 @@ public class Produto {
     public void setComponente(Componente componente) {
         this.componente = componente;
     }
+    @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    public Localizacao localizacao;
+
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
+    }
+
 
 
     

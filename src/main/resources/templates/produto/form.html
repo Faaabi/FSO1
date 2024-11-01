@@ -29,6 +29,21 @@
                     type="text"
                     placeholder="Principais informações">
                 </div>
+
+
+                
+                <div class="form-grup">
+                    <label for="txtmodelo">Localização</label>
+                    <select class="form-select" th:field="*{localizacao}">
+                        <option th:each="umalocalozacao : ${listaLocalizacao}"
+                        th:text="${umalocalozacao.nome}"
+                        th:value="${umalocalozacao.id}">
+                    
+                    </option>
+
+                    </select>
+                </div>
+                </select>
                 <br>
         <div class="d-grid gap-2 d-md-block">
             <button type="submit" class="btn btn-primary">Enviar</button>

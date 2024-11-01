@@ -1,5 +1,7 @@
 package br.univille.projetinventarioweb.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.univille.projetinventarioweb.entity.Produto;
 import br.univille.projetinventarioweb.repository.ProdutoRepository;
+import br.univille.projetinventarioweb.service.LocalizacaoSevice;
 import br.univille.projetinventarioweb.service.ProdutoService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,6 +23,8 @@ public class ProdutoController {
     
     @Autowired
     private ProdutoService service;
+    @Autowired
+    private LocalizacaoSevice localizacaoSevice;
     
     @GetMapping
     public ModelAndView index(){
@@ -32,7 +37,12 @@ public class ProdutoController {
     @GetMapping("/novo")    
     public ModelAndView novo(){
         var produto = new Produto();
-        return new ModelAndView("produto/form", "produto" ,produto);
+        var listaLocalizacao = localizacaoSevice.getAll();
+        HashMap<String,Object> dados=
+            new HashMap<>();
+            dados.put("produto" ,produto);
+            dados.put("listaLocalizacao", listaLocalizacao);
+        return new ModelAndView("produto/form", dados);
         
     }
     @PostMapping
@@ -53,5 +63,6 @@ public class ProdutoController {
         }
         return new ModelAndView("redirect:/produto");
     }
+ 
 
 }
