@@ -23,6 +23,7 @@ public class Produto {
     @Column(length = 1000)
     private String obs;
 
+    
     public long getId() {
         return id;    
     }

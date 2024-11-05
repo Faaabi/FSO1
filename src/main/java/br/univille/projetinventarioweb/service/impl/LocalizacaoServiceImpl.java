@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import br.univille.projetinventarioweb.entity.Localizacao;
 import br.univille.projetinventarioweb.repository.LocalizacaoRepository;
-import br.univille.projetinventarioweb.service.LocalizacaoSevice;
+import br.univille.projetinventarioweb.service.LocalizacaoService;
 
 
 @Service
-public class LocalizacaoServiceImpl implements LocalizacaoSevice {
+public class LocalizacaoServiceImpl implements LocalizacaoService {
     @Autowired
     private LocalizacaoRepository repository;
 

@@ -7,12 +7,12 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import br.univille.projetinventarioweb.entity.Localizacao;
-import br.univille.projetinventarioweb.service.LocalizacaoSevice;
+import br.univille.projetinventarioweb.service.LocalizacaoService;
 
 @Component
 public class Startup {
     @Autowired
-    private LocalizacaoSevice serviceLocalizacao;
+    private LocalizacaoService serviceLocalizacao;
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event){
         var CA = new Localizacao();
@@ -34,8 +34,6 @@ public class Startup {
         APLICATION.setId(1);
         APLICATION.setNome("Lab APLICATION");
         serviceLocalizacao.save(APLICATION);
-
-
 
 
 

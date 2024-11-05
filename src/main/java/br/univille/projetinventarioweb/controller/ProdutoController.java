@@ -12,7 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.univille.projetinventarioweb.entity.Produto;
 import br.univille.projetinventarioweb.repository.ProdutoRepository;
-import br.univille.projetinventarioweb.service.LocalizacaoSevice;
+import br.univille.projetinventarioweb.service.ComponenteService;
+import br.univille.projetinventarioweb.service.LocalizacaoService;
 import br.univille.projetinventarioweb.service.ProdutoService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,8 +25,12 @@ public class ProdutoController {
     @Autowired
     private ProdutoService service;
     @Autowired
-    private LocalizacaoSevice localizacaoSevice;
+    private LocalizacaoService localizacaoService;
+    @Autowired
+    private ComponenteService componenteService;
     
+
+
     @GetMapping
     public ModelAndView index(){
         //chamar o banco de dados e dar um select *from tabela -> na vida real é feito paginação
@@ -37,7 +42,7 @@ public class ProdutoController {
     @GetMapping("/novo")    
     public ModelAndView novo(){
         var produto = new Produto();
-        var listaLocalizacao = localizacaoSevice.getAll();
+        var listaLocalizacao = localizacaoService.getAll();
         HashMap<String,Object> dados=
             new HashMap<>();
             dados.put("produto" ,produto);
@@ -53,7 +58,13 @@ public class ProdutoController {
     @GetMapping("/alterar/{id}")
     public ModelAndView alterar (@PathVariable("id") long id){
         var umProduto = service.getById(id);
-        return new ModelAndView("produto/form", "produto" ,umProduto);
+        var listaLocalizacao = localizacaoService.getAll();
+    
+        HashMap<String,Object> dados =new HashMap<>();
+        dados.put("produto", umProduto);
+        dados.put("listaLocalizacao", listaLocalizacao);
+        return new ModelAndView("produto/form", dados);
+
     }
     @GetMapping("/delete/{id}")
     public ModelAndView delete (@PathVariable("id") long id){

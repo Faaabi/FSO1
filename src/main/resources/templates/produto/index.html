@@ -14,12 +14,14 @@
                 <thead>
                     <th>Modelo</th>
                     <th>Observação</th>
+                    <th>Localização</th>
                     <th></th>
                 </thead>
                 <tbody>
                     <tr th:each="umProduto : ${listaProduto}">
                         <td th:text="${umProduto.modelo}"></td>
                         <td th:text="${umProduto.obs}"></td>
+                        <td th:text="${umProduto.localizacao?.nome}"></td><!--Ponto de interrogação é para não dar erro quando não tiver caracteres-->
                         <td>
                             <a th:href="@{'/produto/alterar/' +${umProduto.id}}" class="btn btn-warning">Alterar</a>
                             <button class="btn btn-danger js-delete"
