@@ -8,28 +8,23 @@
         <nav th:replace="layout :: menu">(menu)</nav>
         <main class="container">
 
-            <h1>Produto</h1>
-            <a href="/produto/novo" class="btn btn-primary">Novo Produto</a>
+            <h1>Compressor</h1>
+            <a href="/comp/novo" class="btn btn-primary">Novo Produto</a>
             <table class="table" id="tabelaproduto">
                 <thead>
-                    <th>Modelo</th>
-                    <th>Serial Number</th>
-                    <th>Tecnologia</th>
-                    <th>Localização</th>
-                    <th>Observação</th>
+                    <th>Tipo de Compressor</th>
+                    <th>Principal Informação</th>
                     <th></th>
                 </thead>
                 <tbody>
-                    <tr th:each="umProduto : ${listaProduto}">
-                        <td th:text="${umProduto.modelo}"></td>
-                        <td th:text="${umProduto.sn}"></td>
-                        <td th:text="${umProduto.tec?.nome}"></td>
-                        <td th:text="${umProduto.localizacao?.nome}"></td><!--Ponto de interrogação é para não dar erro quando não tiver caracteres-->
-                        <td th:text="${umProduto.obs}"></td>
+                    <tr th:each="umComp: ${listaComp}">
+                        <td th:text="${umComp.modelo}"></td>
+                       <!-- <td th:text="${umProduto.localizacao?.nome}"></td>-->
+                        <!--Ponto de interrogação é para não dar erro quando não tiver caracteres-->
                         <td>
-                            <a th:href="@{'/produto/alterar/' +${umProduto.id}}" class="btn btn-warning">Alterar</a>
+                            <a th:href="@{'/comp/alterar/' +${umComp.id}}" class="btn btn-warning">Alterar</a>
                             <button class="btn btn-danger js-delete"
-                            th:data-id="${umProduto.id}">
+                            th:data-id="${umComp  .id}">
                             Excluir</button>
                         </td>
 
@@ -51,7 +46,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Deseja Excluir Produto</p>
+          <p>Deseja Excluir Produto</p> 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

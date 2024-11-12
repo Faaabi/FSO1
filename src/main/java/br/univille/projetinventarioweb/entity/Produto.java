@@ -20,6 +20,15 @@ public class Produto {
     @Column(length = 1000) //deixa o campo obrigatorio
     private String modelo;
     
+    @Column     
+    private String sn;
+
+    public String getSn() {
+        return sn;
+    }
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
     @Column(length = 1000)
     private String obs;
 
@@ -43,13 +52,13 @@ public class Produto {
         this.obs = obs;
     }  
     @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
-    public Componente componente;
+    public Comp comp;
 
-    public Componente getComponente() {
-        return componente;
+    public Comp getComp() {
+        return comp;
     }
-    public void setComponente(Componente componente) {
-        this.componente = componente;
+    public void setComp(Comp comp) {
+        this.comp = comp;
     }
     @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     public Localizacao localizacao;
@@ -61,7 +70,14 @@ public class Produto {
         this.localizacao = localizacao;
     }
 
+    @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    public Tec tec;
 
-
+    public Tec getTec(){
+        return tec;
+    }
+    public void setTec(Tec tec){
+        this.tec = tec;
+    }
     
 }

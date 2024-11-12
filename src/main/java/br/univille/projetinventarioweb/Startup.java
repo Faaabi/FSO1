@@ -7,12 +7,16 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import br.univille.projetinventarioweb.entity.Localizacao;
+import br.univille.projetinventarioweb.entity.Tec;
 import br.univille.projetinventarioweb.service.LocalizacaoService;
+import br.univille.projetinventarioweb.service.TecService;
 
 @Component
 public class Startup {
     @Autowired
     private LocalizacaoService serviceLocalizacao;
+    @Autowired
+    private TecService serviceTec;
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event){
         var CA = new Localizacao();
@@ -36,8 +40,17 @@ public class Startup {
         serviceLocalizacao.save(APLICATION);
 
 
+        var split = new Tec();
+        split.setId(1);
+        split.setNome("Split");
+        serviceTec.save(split);
 
-        
-    }   
+        var janela= new Tec();
+        janela.setId(2);
+        janela.setNome("Janela");
+        serviceTec.save(janela);
+    }
+    
+    
 }
 

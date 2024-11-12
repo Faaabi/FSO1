@@ -12,9 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.univille.projetinventarioweb.entity.Produto;
 import br.univille.projetinventarioweb.repository.ProdutoRepository;
-import br.univille.projetinventarioweb.service.ComponenteService;
+import br.univille.projetinventarioweb.service.CompService;
 import br.univille.projetinventarioweb.service.LocalizacaoService;
 import br.univille.projetinventarioweb.service.ProdutoService;
+import br.univille.projetinventarioweb.service.TecService;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -27,10 +29,9 @@ public class ProdutoController {
     @Autowired
     private LocalizacaoService localizacaoService;
     @Autowired
-    private ComponenteService componenteService;
+    private TecService tecService;
+   
     
-
-
     @GetMapping
     public ModelAndView index(){
         //chamar o banco de dados e dar um select *from tabela -> na vida real é feito paginação
@@ -43,13 +44,16 @@ public class ProdutoController {
     public ModelAndView novo(){
         var produto = new Produto();
         var listaLocalizacao = localizacaoService.getAll();
+        var listaTec = tecService.getAll();
         HashMap<String,Object> dados=
             new HashMap<>();
             dados.put("produto" ,produto);
             dados.put("listaLocalizacao", listaLocalizacao);
+            dados.put("listaTec", listaTec);
         return new ModelAndView("produto/form", dados);
         
     }
+
     @PostMapping
     public ModelAndView save(Produto produto){
         service.save(produto);
@@ -59,10 +63,12 @@ public class ProdutoController {
     public ModelAndView alterar (@PathVariable("id") long id){
         var umProduto = service.getById(id);
         var listaLocalizacao = localizacaoService.getAll();
+        var listaTec = tecService.getAll();
     
         HashMap<String,Object> dados =new HashMap<>();
         dados.put("produto", umProduto);
         dados.put("listaLocalizacao", listaLocalizacao);
+        dados.put("listaTec", listaTec);
         return new ModelAndView("produto/form", dados);
 
     }
