@@ -71,7 +71,7 @@ public class Produto {
     }
 
     @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    public Tec tec;
+    public Tec  tec;
 
     public Tec getTec(){
         return tec;
@@ -79,5 +79,11 @@ public class Produto {
     public void setTec(Tec tec){
         this.tec = tec;
     }
-    
+
+    @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    public Status status;
+
+    public void setStatus(Status status){
+        this.status = status;
+    }
 }

@@ -40,15 +40,15 @@ public class Startup {
         serviceLocalizacao.save(APLICATION);
 
 
-        var split = new Tec();
-        split.setId(1);
-        split.setNome("Split");
-        serviceTec.save(split);
+        var inverter = new Tec();
+        inverter.setId(1);
+        inverter.setNome("Inverter");
+        serviceTec.save(inverter);
 
-        var janela= new Tec();
-        janela.setId(2);
-        janela.setNome("Janela");
-        serviceTec.save(janela);
+        var onoff= new Tec();
+        onoff.setId(2);
+        onoff.setNome("ON/OFF");
+        serviceTec.save(onoff);
     }
     
     
