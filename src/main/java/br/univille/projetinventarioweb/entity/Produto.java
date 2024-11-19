@@ -83,7 +83,23 @@ public class Produto {
     @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     public Status status;
 
+    public Status getStatus(){
+        return status;
+    }
+
     public void setStatus(Status status){
         this.status = status;
     }
+
+    @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    public Tipo tipo;
+
+    public Tipo getTipo(){
+        return tipo;
+    }
+
+    public void setStatus(Tipo tipo){
+        this.tipo = tipo;
+    }
+
 }

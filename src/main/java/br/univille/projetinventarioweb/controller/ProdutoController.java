@@ -1,7 +1,6 @@
 package br.univille.projetinventarioweb.controller;
-
+import java.io.ObjectInputFilter.Status;
 import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,13 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import br.univille.projetinventarioweb.entity.Produto;
 import br.univille.projetinventarioweb.repository.ProdutoRepository;
 import br.univille.projetinventarioweb.service.CompService;
 import br.univille.projetinventarioweb.service.LocalizacaoService;
 import br.univille.projetinventarioweb.service.ProdutoService;
+import br.univille.projetinventarioweb.service.StatusService;
 import br.univille.projetinventarioweb.service.TecService;
+import br.univille.projetinventarioweb.service.TipoService;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,6 +30,10 @@ public class ProdutoController {
     private LocalizacaoService localizacaoService;
     @Autowired
     private TecService tecService;
+    @Autowired
+    private StatusService statusService;
+    @Autowired
+    private TipoService tipoService;
    
     
     @GetMapping
@@ -45,12 +49,16 @@ public class ProdutoController {
         var produto = new Produto();
         var listaLocalizacao = localizacaoService.getAll();
         var listaTec = tecService.getAll();
+        var listaStatus = statusService.getAll();
+        var listaTipo = tipoService.getAll();
         HashMap<String,Object> dados=
             new HashMap<>();
             dados.put("produto" ,produto);
             dados.put("listaLocalizacao", listaLocalizacao);
             dados.put("listaTec", listaTec);
-        return new ModelAndView("produto/form", dados);
+            dados.put("listaStatus", listaStatus);
+            dados.put("listaTipo", listaTipo);
+            return new ModelAndView("produto/form", dados);
         
     }
 
@@ -64,11 +72,15 @@ public class ProdutoController {
         var umProduto = service.getById(id);
         var listaLocalizacao = localizacaoService.getAll();
         var listaTec = tecService.getAll();
+        var listaStatus = statusService.getAll();
+        var listaTipo = tipoService.getAll();
     
         HashMap<String,Object> dados =new HashMap<>();
         dados.put("produto", umProduto);
         dados.put("listaLocalizacao", listaLocalizacao);
         dados.put("listaTec", listaTec);
+        dados.put("listaStatus", listaStatus);
+        dados.put("listaTipo", listaTipo);
         return new ModelAndView("produto/form", dados);
 
     }

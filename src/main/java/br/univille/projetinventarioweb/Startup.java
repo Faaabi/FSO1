@@ -7,9 +7,13 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import br.univille.projetinventarioweb.entity.Localizacao;
+import br.univille.projetinventarioweb.entity.Status;
 import br.univille.projetinventarioweb.entity.Tec;
+import br.univille.projetinventarioweb.entity.Tipo;
 import br.univille.projetinventarioweb.service.LocalizacaoService;
+import br.univille.projetinventarioweb.service.StatusService;
 import br.univille.projetinventarioweb.service.TecService;
+import br.univille.projetinventarioweb.service.TipoService;
 
 @Component
 public class Startup {
@@ -17,6 +21,11 @@ public class Startup {
     private LocalizacaoService serviceLocalizacao;
     @Autowired
     private TecService serviceTec;
+    @Autowired
+    private StatusService serviceStatus;
+    @Autowired
+    private TipoService serviceTipo;
+
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event){
         var CA = new Localizacao();
@@ -35,20 +44,44 @@ public class Startup {
         serviceLocalizacao.save(SAFETY);
 
         var APLICATION = new Localizacao();
-        APLICATION.setId(1);
+        APLICATION.setId(4);
         APLICATION.setNome("Lab APLICATION");
         serviceLocalizacao.save(APLICATION);
 
-
         var inverter = new Tec();
-        inverter.setId(1);
+        inverter.setId(5);
         inverter.setNome("Inverter");
         serviceTec.save(inverter);
 
         var onoff= new Tec();
-        onoff.setId(2);
+        onoff.setId(6);
         onoff.setNome("ON/OFF");
         serviceTec.save(onoff);
+
+        var baseline = new Status();
+        baseline.setId(6);
+        baseline.setStatus("Baseline");
+        serviceStatus.save(baseline);
+        
+        var prototipo = new Status();
+        prototipo.setId(7);
+        prototipo.setStatus("Protótipo");
+        serviceStatus.save(prototipo);
+
+        var modificado = new Status();
+        modificado.setId(8);
+        modificado.setStatus("Modificado");
+        serviceStatus.save(modificado);
+
+        var Split = new Tipo();
+        Split.setId(9);
+        Split.setTipo("Split");
+        serviceTipo.save(Split);
+
+        var window = new Tipo();
+        window.setId(10);
+        window.setTipo("Window");
+        serviceTipo.save(window);
     }
     
     

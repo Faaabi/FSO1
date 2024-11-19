@@ -16,6 +16,8 @@
                     <th>Serial Number</th>
                     <th>Tecnologia</th>
                     <th>Localização</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
                     <th>Observação</th>
                     <th></th>
                 </thead>
@@ -25,6 +27,8 @@
                         <td th:text="${umProduto.sn}"></td>
                         <td th:text="${umProduto.tec?.nome}"></td>
                         <td th:text="${umProduto.localizacao?.nome}"></td><!--Ponto de interrogação é para não dar erro quando não tiver caracteres-->
+                        <td th:text="${umProduto.tipo?.tipo}"></td><!--não ta aparecendo infeeeeernoooo -->
+                        <td th:text="${umProduto.status?.status}"></td>
                         <td th:text="${umProduto.obs}"></td>
                         <td>
                             <a th:href="@{'/produto/alterar/' +${umProduto.id}}" class="btn btn-warning">Alterar</a>
