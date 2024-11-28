@@ -94,6 +94,9 @@ public class Produto {
     @ManyToOne (cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     public Tipo tipo;
 
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
     public Tipo getTipo(){
         return tipo;
     }

@@ -1,6 +1,6 @@
 package br.univille.projetinventarioweb.entity;
 
-import org.hibernate.annotations.Collate;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,6 +16,9 @@ public class Comp {
 
     @Column(length = 1000)
     private String modelo;
+
+    @Column(length =  1000)
+    private String info;
 
     public String getModelo() {
         return modelo;

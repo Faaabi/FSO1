@@ -1,8 +1,11 @@
 package br.univille.projetinventarioweb.controller;
 import java.io.ObjectInputFilter.Status;
+import java.nio.file.AccessDeniedException;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,14 +40,16 @@ public class ProdutoController {
    
     
     @GetMapping
+    @PreAuthorize("hasAuthority('APPROLE_Read') or hasAuthority('APPROLE_Admin')")
     public ModelAndView index(){
         //chamar o banco de dados e dar um select *from tabela -> na vida real é feito paginação
         var listaProduto = service.getAll();        //montar a tela com os dados do banco
 
         return new ModelAndView("produto/index", "listaProduto", listaProduto);
     }
-
-    @GetMapping("/novo")    
+    
+    @GetMapping("/novo")
+    @PreAuthorize("hasAuthority('APPROLE_Admin')")    
     public ModelAndView novo(){
         var produto = new Produto();
         var listaLocalizacao = localizacaoService.getAll();
@@ -61,13 +66,16 @@ public class ProdutoController {
             return new ModelAndView("produto/form", dados);
         
     }
-
+    
     @PostMapping
+    @PreAuthorize("hasAuthority('APPROLE_Admin')")   
     public ModelAndView save(Produto produto){
         service.save(produto);
         return new ModelAndView("redirect:/produto");// a parte do form
     }
+    
     @GetMapping("/alterar/{id}")
+    @PreAuthorize("hasAuthority('APPROLE_Admin')")
     public ModelAndView alterar (@PathVariable("id") long id){
         var umProduto = service.getById(id);
         var listaLocalizacao = localizacaoService.getAll();
@@ -85,6 +93,7 @@ public class ProdutoController {
 
     }
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('APPROLE_Admin')")
     public ModelAndView delete (@PathVariable("id") long id){
         var umProduto = service.getById(id);
         if(umProduto!= null){
@@ -93,5 +102,9 @@ public class ProdutoController {
         return new ModelAndView("redirect:/produto");
     }
  
+    @ExceptionHandler(AccessDeniedException.class)
+    public ModelAndView handle404Exception(AccessDeniedException ex) {
+        return new ModelAndView("erro/400");
+    }
 
 }
