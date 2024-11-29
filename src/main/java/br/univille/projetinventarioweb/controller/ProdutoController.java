@@ -17,7 +17,9 @@ import br.univille.projetinventarioweb.service.CompService;
 import br.univille.projetinventarioweb.service.LocalizacaoService;
 import br.univille.projetinventarioweb.service.ProdutoService;
 import br.univille.projetinventarioweb.service.StatusService;
+import br.univille.projetinventarioweb.service.TcompService;
 import br.univille.projetinventarioweb.service.TecService;
+import br.univille.projetinventarioweb.service.TensaoService;
 import br.univille.projetinventarioweb.service.TipoService;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,6 +39,12 @@ public class ProdutoController {
     private StatusService statusService;
     @Autowired
     private TipoService tipoService;
+    @Autowired
+    private CompService compService;
+    @Autowired
+    private TensaoService tensaoService;
+    @Autowired
+    private TcompService tcompService;
    
     
     @GetMapping
@@ -56,6 +64,9 @@ public class ProdutoController {
         var listaTec = tecService.getAll();
         var listaStatus = statusService.getAll();
         var listaTipo = tipoService.getAll();
+        var listaComp = compService.getAll();
+        var listaTensao = tensaoService.getAll();
+        var listaTComp = tcompService.getAll();
         HashMap<String,Object> dados=
             new HashMap<>();
             dados.put("produto" ,produto);
@@ -63,6 +74,9 @@ public class ProdutoController {
             dados.put("listaTec", listaTec);
             dados.put("listaStatus", listaStatus);
             dados.put("listaTipo", listaTipo);
+            dados.put("listaComp", listaComp);
+            dados.put("listaTensao", listaTensao);
+            dados.put("listaTComp", listaTComp);
             return new ModelAndView("produto/form", dados);
         
     }
@@ -82,13 +96,18 @@ public class ProdutoController {
         var listaTec = tecService.getAll();
         var listaStatus = statusService.getAll();
         var listaTipo = tipoService.getAll();
-    
+        var listaComp = compService.getAll();
+        var listaTensao = tensaoService.getAll();
+        var listaTComp = tcompService.getAll();
         HashMap<String,Object> dados =new HashMap<>();
         dados.put("produto", umProduto);
         dados.put("listaLocalizacao", listaLocalizacao);
         dados.put("listaTec", listaTec);
         dados.put("listaStatus", listaStatus);
         dados.put("listaTipo", listaTipo);
+        dados.put("listaComp", listaComp);
+        dados.put("listaTensao", listaTensao);
+        dados.put("listaTComp", listaTComp);
         return new ModelAndView("produto/form", dados);
 
     }
@@ -100,6 +119,30 @@ public class ProdutoController {
             service.delete(id);
         }
         return new ModelAndView("redirect:/produto");
+    }
+
+    @GetMapping("/detalhe/{id}")
+    @PreAuthorize("hasAuthority('APPROLE_Admin')")
+    public ModelAndView detalhe (@PathVariable("id") long id){
+        var umProduto = service.getById(id);
+        var listaLocalizacao = localizacaoService.getAll();
+        var listaTec = tecService.getAll();
+        var listaStatus = statusService.getAll();
+        var listaTipo = tipoService.getAll();
+        var listaComp = compService.getAll();
+        var listaTensao = tensaoService.getAll();
+        var listaTComp = tcompService.getAll();
+        HashMap<String,Object> dados =new HashMap<>();
+        dados.put("produto", umProduto);
+        dados.put("listaLocalizacao", listaLocalizacao);
+        dados.put("listaTec", listaTec);
+        dados.put("listaStatus", listaStatus);
+        dados.put("listaTipo", listaTipo);
+        dados.put("listaComp", listaComp);
+        dados.put("listaTensao", listaTensao);
+        dados.put("listaTComp", listaTComp);
+        return new ModelAndView("produto/detalhe", dados);
+
     }
  
     @ExceptionHandler(AccessDeniedException.class)

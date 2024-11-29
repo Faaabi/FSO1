@@ -14,7 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.univille.projetinventarioweb.entity.Comp;
 import br.univille.projetinventarioweb.entity.Produto;
+import br.univille.projetinventarioweb.entity.Tensao;
 import br.univille.projetinventarioweb.service.CompService;
+import br.univille.projetinventarioweb.service.TcompService;
+import br.univille.projetinventarioweb.service.TensaoService;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -23,6 +27,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CompController {
     @Autowired
     private CompService service;
+
+    @Autowired
+    private TensaoService tensaoService;
+
+    @Autowired
+    private TcompService tcompService;
 
     @GetMapping
     public ModelAndView index(){
@@ -34,8 +44,12 @@ public class CompController {
     @GetMapping("/novo")
         public ModelAndView novo(){
             var comp = new Comp();
+            var listaTensao = tensaoService.getAll();
+            var listaTcomp = tcompService.getAll();
             HashMap<String,Object> dados= new HashMap<>();
                 dados.put("comp" , comp);
+                dados.put("listaTensao", listaTensao);
+                dados.put("listaTcomp", listaTcomp);
                 return new ModelAndView("comp/form",dados);
     }
 
@@ -48,9 +62,14 @@ public class CompController {
     @GetMapping("/alterar/{id}")
     public ModelAndView alterar (@PathVariable("id") long id){
         var umComp = service.getById(id);
+        var listaTensao = tensaoService.getAll();
+        var listaTcomp = tcompService.getAll();
+
 
         HashMap<String,Object> dados =new HashMap<>();
         dados.put("comp", umComp);
+        dados.put("listaTensao", listaTensao);
+        dados.put("listaTcomp", listaTcomp);
         return new ModelAndView("comp/form", dados);
 
     }

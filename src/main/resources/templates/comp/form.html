@@ -7,20 +7,63 @@
 
         <nav th:replace="layout :: menu">(menu)</nav>
         <main class="container">
-            <h1>Produto</h1>
+            <h1>Componentes</h1>
             <form th:action="@{/componente}" method="POST" th:object="${comp}">  
                 <input type="hidden" th:field="*{id}">
                 <div class="form-grup">
                     <label for="txtmodelo">Tipo de Componente</label>
-                    <!-- id é para não ter a mesma id-->
+                    <select class="form-select" th:field="*{tcomp}">
+                        <option th:each="umatcomp : ${listaTcomp}"
+                        th:text="${umatcomp.tcomp}"
+                        th:value="${umatcomp.id}">
+                        </option>
+                    </select>
+                </div>
+        
+                <div class="form-grup">
+                    <label for="txtmodelo">Part Number</label>
+                     <!-- id é para não ter a mesma id-->
+                    <input 
+                    id="txtmodelo"
+                    th:field="*{pn}"
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Part Number">
+                </div>
+
+                <div class="form-grup">
+                    <label for="txtmodelo">Marca</label>
+                     <!-- id é para não ter a mesma id-->
+                    <input 
+                    id="txtmodelo"
+                    th:field="*{marca}"
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Marca">
+                </div>
+
+                <div class="form-grup">
+                    <label for="txtmodelo">Modelo</label>
+                     <!-- id é para não ter a mesma id-->
                     <input 
                     id="txtmodelo"
                     th:field="*{modelo}"
                     class="form-control form-control-sm"
                     type="text"
-                    placeholder="Modelo do produto">
+                    placeholder="Tipo de Componente">
+                </div>
+
+                <div class="form-grup">
+                    <label for="txtmodelo">Tensão</label>
+                    <select class="form-select" th:field="*{tensao}">
+                        <option th:each="umatensao: ${listaTensao}"
+                        th:text="${umatensao.nome}"
+                        th:value="${umatensao.id}">
+                        </option>
+                    </select>
                 </div>
                 <br>
+
         <div class="d-grid gap-2 d-md-block">
             <button type="submit" class="btn btn-primary">Enviar</button>
         </div>

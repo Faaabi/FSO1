@@ -79,6 +79,15 @@
                     </select>
                 </div>
                 </select>
+                <div class="form-grup">
+                    <label for="txtmodelo">Componente</label>
+                        <select class="form-select" th:field="*{comp}">
+                            <option th:each="umaComp : ${listaComp}"
+                            th:text="${umaComp.pn}"
+                            th:value="${umaComp.id}">
+                            </option>
+                        </select>
+                </div>
                 <br>
         <div class="d-grid gap-2 d-md-block">
             <button type="submit" class="btn btn-primary">Enviar</button>

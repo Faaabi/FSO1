@@ -8,11 +8,15 @@ import org.springframework.stereotype.Component;
 
 import br.univille.projetinventarioweb.entity.Localizacao;
 import br.univille.projetinventarioweb.entity.Status;
+import br.univille.projetinventarioweb.entity.Tcomp;
 import br.univille.projetinventarioweb.entity.Tec;
+import br.univille.projetinventarioweb.entity.Tensao;
 import br.univille.projetinventarioweb.entity.Tipo;
 import br.univille.projetinventarioweb.service.LocalizacaoService;
 import br.univille.projetinventarioweb.service.StatusService;
+import br.univille.projetinventarioweb.service.TcompService;
 import br.univille.projetinventarioweb.service.TecService;
+import br.univille.projetinventarioweb.service.TensaoService;
 import br.univille.projetinventarioweb.service.TipoService;
 
 @Component
@@ -25,6 +29,10 @@ public class Startup {
     private StatusService serviceStatus;
     @Autowired
     private TipoService serviceTipo;
+    @Autowired
+    private TensaoService serviceTensao;
+    @Autowired
+    private TcompService serviceTcomp;
 
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event){
@@ -82,6 +90,31 @@ public class Startup {
         window.setId(10);
         window.setTipo("Window");
         serviceTipo.save(window);
+
+        var bivolt = new Tensao();
+        bivolt.setId(11);
+        bivolt.setNome("Bivolt");
+        serviceTensao.save(bivolt);
+
+        var cento = new Tensao();
+        cento.setId(12);
+        cento.setNome("110V");
+        serviceTensao.save(cento);
+
+        var vinte = new Tensao();
+        vinte.setId(13);
+        vinte.setNome("220V");
+        serviceTensao.save(vinte);
+
+        var comp = new Tcomp();
+        comp.setId(13);
+        comp.setTcomp("Compressor");
+        serviceTcomp.save(comp);
+
+        var motor = new Tcomp();
+        motor.setId(13);
+        motor.setTcomp("Motor");
+        serviceTcomp.save(motor);
     }
     
     

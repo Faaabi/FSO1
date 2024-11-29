@@ -9,8 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity// gera uma tabela BD
-
-
 public class Produto {
 
     @Id //é a primary key
@@ -104,5 +102,6 @@ public class Produto {
     public void setStatus(Tipo tipo){
         this.tipo = tipo;
     }
-
+    
+    
 }
