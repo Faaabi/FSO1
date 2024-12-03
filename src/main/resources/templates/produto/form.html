@@ -21,6 +21,52 @@
                     placeholder="Modelo do produto">
                 </div>
                 <div class="form-grup">
+                    <label for="txtmodelo">Serial Number</label>
+                    <!-- id é para não ter a mesma id-->
+                    <input 
+                    id="txtsn"
+                    th:field="*{sn}"
+                    class="form-control form-control-sm"
+                    type="text"
+                    placeholder="Modelo do produto">
+                </div>
+                <div class="form-grup">
+                    <label for="txtmodelo">Tecnologia</label>
+                    <select class="form-select" th:field="*{tec}">
+                        <option th:each="umatec : ${listaTec}"
+                        th:text="${umatec.nome}"
+                        th:value="${umatec.id}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grup">
+                    <label for="txtmodelo">Localização</label>
+                    <select class="form-select" th:field="*{localizacao}">
+                        <option th:each="umalocalozacao : ${listaLocalizacao}"
+                        th:text="${umalocalozacao.nome}"
+                        th:value="${umalocalozacao.id}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grup">
+                    <label for="txtmodelo">Tipo</label>
+                    <select class="form-select" th:field="*{tipo}">
+                        <option th:each="umtipo : ${listaTipo}"
+                        th:text="${umtipo.tipo}"
+                        th:value="${umtipo.id}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-grup">
+                    <label for="txtmodelo">Status</label>
+                        <select class="form-select" th:field="*{status}">
+                            <option th:each="umaStatus : ${listaStatus}"
+                            th:text="${umaStatus.Status}"
+                            th:value="${umaStatus.id}">
+                            </option>
+                        </select>
+                </div>
+                <div class="form-grup">
                     <label for="txtobs">Observação</label>
                     <input 
                     id="txtobs"
@@ -28,6 +74,19 @@
                     class="form-control form-control-sm"
                     type="text"
                     placeholder="Principais informações">
+                </div>                    
+                    </option>
+                    </select>
+                </div>
+                </select>
+                <div class="form-grup">
+                    <label for="txtmodelo">Componente</label>
+                        <select class="form-select" th:field="*{comp}">
+                            <option th:each="umaComp : ${listaComp}"
+                            th:text="${umaComp.pn}"
+                            th:value="${umaComp.id}">
+                            </option>
+                        </select>
                 </div>
                 <br>
         <div class="d-grid gap-2 d-md-block">

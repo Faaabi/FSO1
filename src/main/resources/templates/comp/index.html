@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!---link faz o CSS
+//script faz o javascript-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        
+        <nav th:replace="layout :: menu">(menu)</nav>
+        <main class="container">
+
+            <h1>Componentes</h1>
+            <a href="/componente/novo" class="btn btn-primary">Novo Produto</a>
+            <table class="table" id="tabelacomp">
+                <thead>
+                    <th>Tipo de Componente</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Part Number</th>
+                    <th>Tensão</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr th:each="umComp: ${listaComp}">
+                        <td th:text="${umComp.Tcomp?.tcomp}"></td>
+                        <td th:text="${umComp.marca}"></td>
+                        <td th:text="${umComp.modelo}"></td>
+                        <td th:text="${umComp.pn}"></td>
+                        <td th:text="${umComp.tensao?.nome}"></td>
+                        <!--Ponto de interrogação é para não dar erro quando não tiver caracteres-->
+                        <td>
+                            <a th:href="@{'/componente/alterar/' +${umComp.id}}" class="btn btn-warning">Alterar</a>
+                            <button class="btn btn-danger js-delete"
+                            th:data-id="${umComp.id}">
+                            Excluir</button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        
+        </main>
+        <div th:include="layout :: footer">(footer)</div>
+        <script th:src="@{/scriptcomp.js}"></script>
+    </body>
+</html>
+
+<div class="modal" tabindex="-1" id="modalcomp">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir Componente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Deseja Excluir 
+            Componente</p> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnsim">Confirmar</button>
+        </div>
+      </div> 
+    </div>
+  </div>

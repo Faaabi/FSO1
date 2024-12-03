@@ -5,38 +5,38 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.univille.projetinventarioweb.entity.Produto;
-import br.univille.projetinventarioweb.repository.ProdutoRepository;
-import br.univille.projetinventarioweb.service.ProdutoService;
-//aqui é a implementação da interface
-
+import br.univille.projetinventarioweb.entity.Comp;
+import br.univille.projetinventarioweb.repository.CompRepository;
+import br.univille.projetinventarioweb.service.CompService;
 @Service
-public class ProdutoServiceImpl implements ProdutoService{
-
+public class CompServiceImpl implements CompService{
+    
     @Autowired
-    private ProdutoRepository repository;
+    private CompRepository repository;
 
     @Override
-    public List<Produto> getAll() {
+    public List<Comp> getAll() {
         return repository.findAll();
+
     }
 
     @Override
-    public Produto save(Produto produto) {
-        repository.save(produto);
-        return produto;
+    public Comp save(Comp comp) {
+        repository.save(comp);
+        return comp;
     }
 
     @Override
-    public Produto getById(long id) {
-       
+    public Comp delete(long id) {
         var retorno = repository.findById(id);
         if(retorno.isPresent())
             return retorno.get();
         return null;
      }
-     @Override
-     public Produto delete(long id) {
+    
+
+    @Override
+    public Comp getById(long id) {
         var retorno = repository.findById(id);
         if(retorno.isPresent()){
             repository.deleteById(id);
@@ -44,9 +44,5 @@ public class ProdutoServiceImpl implements ProdutoService{
         }
         return null;
     }
-
-
-    }
-
     
-
+}

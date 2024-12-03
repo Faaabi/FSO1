@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<!---link faz o CSS
+//script faz o javascript-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        
+        <nav th:replace="layout :: menu">(menu)</nav>
+        <main class="container">
+
+             <main class="container">
+                <h1>Produto</h1>
+                <div class="container mt-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Modelo</label>
+                            <p class="form-control-plaintext" th:text="${produto.modelo}"></p>
+                        </div>
+                
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Serial Number</label>
+                            <p class="form-control-plaintext" th:text="${produto.sn}"></p>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Tecnologia</label>
+                            <p class="form-control-plaintext" th:text="${produto.tec.nome}"></p>
+                        </div>
+                
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Localização</label>
+                            <p class="form-control-plaintext" th:text="${produto.localizacao.nome}"></p>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Tipo</label>
+                            <p class="form-control-plaintext" th:text="${produto.tipo.tipo}"></p>
+                        </div>
+                
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Status</label>
+                            <p class="form-control-plaintext" th:text="${produto.status.Status}"></p>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold">Observação</label>
+                            <p class="form-control-plaintext" th:text="${produto.obs}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold">Part Number - Componente</label>
+                            <p class="form-control-plaintext" th:text="${produto.comp?.pn}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold">Modelo -  Componente</label>
+                            <p class="form-control-plaintext" th:text="${produto.comp?.modelo}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold">Marca -  Componente</label>
+                            <p class="form-control-plaintext" th:text="${produto.comp?.marca}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold">Tensão -  Componente</label>
+                            <p class="form-control-plaintext" th:text="${produto.comp?.tensao}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold">Tipo de componente -  Componente</label>
+                            <p class="form-control-plaintext" th:text="${produto.comp?.modelo}"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div th:include="layout :: footer">(footer)</div>
+                
+        </body>
+    </html>
