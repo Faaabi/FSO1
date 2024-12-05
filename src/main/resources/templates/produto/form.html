@@ -79,21 +79,49 @@
                     placeholder="Digite as principais informações"></textarea>
             </div>
             
-            <div class="mb-3">
-                <label for="selectComponente" class="form-label">Componente</label>
-                <select id="selectComponente" class="form-select" th:field="*{comp}">
-                    <option th:each="umaComp : ${listaComp}"
-                        th:text="${umaComp.pn}"
-                        th:value="${umaComp.id}">
-                    </option>
-                </select>
+
+        <h3 class="mb-4 text-right">Adicionar Componentes</h3>
+        <div class="card mt-4">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Componentes Adicionados</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="umItem, stat : *{itens}">
+                            <td th:text="${umItem.comp?.pn}"></td>
+                            <input type="hidden" th:field="*{itens[__${stat.index}__].comp}">
+
+                            <td>
+                                <button class="btn btn-danger" type="submit" name="removeitem" th:value="__${stat.index}__">Remover</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary">Salvar Produto</button>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Selecione novo Componente</h5>
+                <div class="form-group">
+                    <label for="cbproduto">Produto:</label>
+                    <select class="form-select" id="cbproduto" th:field="${novoItem.comp}">
+                        <option th:each="umProduto : ${listaComp}" th:value="${umProduto.id}" th:text="${umProduto.pn}"></option>
+                    </select>
+                </div>
+
+                <button type="submit" name="incitem" class="btn btn-primary">Adicionar Componente</button>
             </div>
-        </form>
-    </main>
+        </div>
+
+        <button type="submit" name="save" class="btn btn-primary mt-3">Cadastrar Produto</button>
+    </form>
+</main>
+
     <div th:include="layout :: footer" class="mt-4">(footer)</div>
 </body>
 </html>

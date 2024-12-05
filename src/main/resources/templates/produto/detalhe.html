@@ -1,106 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:include="layout :: htmlhead">
-    <style>
-        /* Estilos adicionais para melhorar a apresentação */
-        .details-label {
-            font-weight: bold;
-            color: #495057;
-        }
-        .details-value {
-            background-color: #f8f9fa;
-            border-radius: 0.25rem;
-            padding: 0.5rem 0.75rem;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            color: #212529;
-        }
-        .section-title {
-            border-bottom: 2px solid #6c757d;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            color: #343a40;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/estilo.css" rel="stylesheet" />
 </head>
 <body>
     <nav th:replace="layout :: menu"></nav>
 
     <main class="container mt-5">
         <h1 class="text-center mb-4">Detalhes do Produto</h1>
-        
-        <div class="container border rounded p-4 shadow-sm bg-light">
-            <!-- Informações gerais do produto -->
-            <h2 class="section-title">Informações do Produto</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="details-label">Modelo</label>
-                    <p class="details-value" th:text="${produto.modelo}"></p>
-                </div>
-                <div class="col-md-6">
-                    <label class="details-label">Serial Number</label>
-                    <p class="details-value" th:text="${produto.sn}"></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="details-label">Tecnologia</label>
-                    <p class="details-value" th:text="${produto.tec?.nome}"></p>
-                </div>
-                <div class="col-md-6">
-                    <label class="details-label">Localização</label>
-                    <p class="details-value" th:text="${produto.localizacao?.nome}"></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="details-label">Tipo</label>
-                    <p class="details-value" th:text="${produto.tipo?.tipo}"></p>
-                </div>
-                <div class="col-md-6">
-                    <label class="details-label">Status</label>
-                    <p class="details-value" th:text="${produto.status?.Status}"></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="details-label">Observação</label>
-                    <p class="details-value" th:text="${produto.obs}"></p>
-                </div>
-            </div>
 
-            <!-- Informações do componente -->
-            <h2 class="section-title">Detalhes do Componente</h2>
-            <div class="row">
+        <!-- Informações gerais do produto -->
+        <div class="border p-4 rounded shadow-sm bg-light">
+            <h2 class="mb-3">Informações do Produto</h2>
+            <div class="row mb-3">
                 <div class="col-md-6">
-                    <label class="details-label">Part Number</label>
-                    <p class="details-value" th:text="${produto.comp?.pn}"></p>
+                    <strong>Modelo:</strong>
+                    <p th:text="${produto.modelo}" class="form-control-plaintext"></p>
                 </div>
                 <div class="col-md-6">
-                    <label class="details-label">Modelo</label>
-                    <p class="details-value" th:text="${produto.comp?.modelo}"></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label class="details-label">Marca</label>
-                    <p class="details-value" th:text="${produto.comp?.marca}"></p>
-                </div>
-                <div class="col-md-6">
-                    <label class="details-label">Tensão</label>
-                    <p class="details-value" th:text="${produto.comp?.tensao?.nome}"></p>
+                    <strong>Serial Number:</strong>
+                    <p th:text="${produto.sn}" class="form-control-plaintext"></p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md-6">
-                    <label class="details-label">Tipo de Componente</label>
-                    <p class="details-value" th:text="${produto.comp?.tcomp?.tcomp}"></p>
+                    <strong>Tecnologia:</strong>
+                    <p th:text="${produto.tec?.nome}" class="form-control-plaintext"></p>
+                </div>
+                <div class="col-md-6">
+                    <strong>Localização:</strong>
+                    <p th:text="${produto.localizacao?.nome}" class="form-control-plaintext"></p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong>Tipo:</strong>
+                    <p th:text="${produto.tipo?.tipo}" class="form-control-plaintext"></p>
+                </div>
+                <div class="col-md-6">
+                    <strong>Status:</strong>
+                    <p th:text="${produto.status?.status}" class="form-control-plaintext"></p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <strong>Observação:</strong>
+                    <p th:text="${produto.obs}" class="form-control-plaintext"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações dos componentes -->
+        <div class="mt-4">
+            <h2 class="mb-3">Detalhes dos Componentes</h2>
+            <div th:each="umComponente, stat : ${produto.comp}" class="border p-3 mb-3 rounded">
+                <h5 th:text="'Componente ' + (${stat.index} + 1)"></h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Part Number:</strong>
+                        <p th:text="${umComponente.pn}" class="form-control-plaintext"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Modelo:</strong>
+                        <p th:text="${umComponente.modelo}" class="form-control-plaintext"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Marca:</strong>
+                        <p th:text="${umComponente.marca}" class="form-control-plaintext"></p>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Tensão:</strong>
+                        <p th:text="${umComponente.tensao?.nome}" class="form-control-plaintext"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <strong>Tipo de Componente:</strong>
+                        <p th:text="${umComponente.tcomp?.tcomp}" class="form-control-plaintext"></p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <div th:include="layout :: footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

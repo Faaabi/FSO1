@@ -1,11 +1,16 @@
 package br.univille.projetinventarioweb.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -104,5 +109,14 @@ public class Produto {
         this.tipo = tipo;
     }
     
-    
+   @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "comp_id")
+    private List<ItemProduto> itens = new ArrayList<>();
+
+    public List<ItemProduto> getItens() {
+        return itens;
+    }
+    public void setItens(List<ItemProduto> itens) {
+        this.itens = itens;
+    }
 }

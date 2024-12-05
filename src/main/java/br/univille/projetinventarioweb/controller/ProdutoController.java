@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import br.univille.projetinventarioweb.entity.ItemProduto;
 import br.univille.projetinventarioweb.entity.Produto;
 import br.univille.projetinventarioweb.repository.ProdutoRepository;
 import br.univille.projetinventarioweb.service.CompService;
@@ -77,6 +79,7 @@ public class ProdutoController {
             dados.put("listaComp", listaComp);
             dados.put("listaTensao", listaTensao);
             dados.put("listaTComp", listaTComp);
+            dados.put("novoItem", new ItemProduto());
             return new ModelAndView("produto/form", dados);
         
     }
@@ -108,6 +111,7 @@ public class ProdutoController {
         dados.put("listaComp", listaComp);
         dados.put("listaTensao", listaTensao);
         dados.put("listaTComp", listaTComp);
+        dados.put("novoItem", new ItemProduto());
         return new ModelAndView("produto/form", dados);
 
     }
@@ -141,13 +145,45 @@ public class ProdutoController {
         dados.put("listaComp", listaComp);
         dados.put("listaTensao", listaTensao);
         dados.put("listaTComp", listaTComp);
+        dados.put("novoItem", new ItemProduto());
         return new ModelAndView("produto/detalhe", dados);
 
     }
- 
+    
+
     @ExceptionHandler(AccessDeniedException.class)
     public ModelAndView handle404Exception(AccessDeniedException ex) {
         return new ModelAndView("erro/400");
+    }
+
+    @PostMapping(params = "incitem")
+    public ModelAndView incluirItem(Produto produto, 
+                ItemProduto novoItem){
+        produto.getItens().add(novoItem);
+
+        var listaComp = compService.getAll();
+        HashMap<String,Object> dados = new HashMap<>();
+        dados.put("produto", produto);
+        dados.put("novoItem", new ItemProduto());
+        dados.put("listaComp", listaComp);
+
+        return new ModelAndView("produto/form",dados);
+    }
+
+    @PostMapping(params = "removeitem")
+    public ModelAndView removerItem(@RequestParam("removeitem") int index, 
+                                Produto produto){
+        produto.getItens().remove(index);
+
+        var listaComp = compService.getAll();
+
+        HashMap<String,Object> dados = 
+            new HashMap<>();
+        dados.put("produto",produto);
+        dados.put("novoItem", new ItemProduto());
+        dados.put("listaComp",listaComp);
+
+        return new ModelAndView("produto/form",dados);
     }
 
 }

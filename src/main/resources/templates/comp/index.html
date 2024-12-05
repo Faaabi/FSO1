@@ -1,74 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:include="layout :: htmlhead"></head>
+<head th:include="layout :: htmlhead">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/estilo.css" rel="stylesheet" />
+
+</head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Menu lateral -->
-            <nav th:replace="layout :: menu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <!-- Adicione seu conteúdo de menu aqui -->
-            </nav>
-
-            <!-- Conteúdo principal -->
-            <main class="col-md-10 col-lg-10 mx-auto px-4">
-                <div class="d-flex justify-content-between align-items-center my-4">
-                    <h1>Componentes</h1>
-                    <a href="/componente/novo" class="btn btn-primary">Novo Componente</a>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-sm">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Tipo de Componente</th>
-                                <th>Marca</th>
-                                <th>Modelo</th>
-                                <th>Part Number</th>
-                                <th>Tensão</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="umComp : ${listaComp}">
-                                <td th:text="${umComp.Tcomp?.tcomp}"></td>
-                                <td th:text="${umComp.marca}"></td>
-                                <td th:text="${umComp.modelo}"></td>
-                                <td th:text="${umComp.pn}"></td>
-                                <td th:text="${umComp.tensao?.nome}"></td>
-                                <td>
-                                    <a th:href="@{'/componente/alterar/' + ${umComp.id}}" class="btn btn-warning btn-sm">Alterar</a>
-                                    <button class="btn btn-danger btn-sm js-delete" th:data-id="${umComp.id}">Excluir</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </main>
-        </div>
-    </div>
-
+    <nav th:replace="layout :: menu"></nav>
+    <main class="container">
+      <div class="d-flex justify-content-between align-items-center my-4">
+        <h1>Componentes</h1>
+        <a href="/componente/novo" class="btn btn-primary mb-3 align-top">Novo Produto</a>
+      </div>
+        <table class="table table-striped table-hover" id="tabelacomp">
+            <thead class="table-dark">
+                <tr>
+                    <th>Tipo de Componente</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Part Number</th>
+                    <th>Tensão</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="umComp: ${listaComp}">
+                    <td th:text="${umComp.Tcomp?.tcomp}"></td>
+                    <td th:text="${umComp.marca}"></td>
+                    <td th:text="${umComp.modelo}"></td>
+                    <td th:text="${umComp.pn}"></td>
+                    <td th:text="${umComp.tensao?.nome}"></td>
+                    <td>
+                        <a th:href="@{'/componente/alterar/' + ${umComp.id}}" class="btn btn-warning btn-sm">Alterar</a>
+                        <button class="btn btn-danger btn-sm js-delete" th:data-id="${umComp.id}">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
     <div th:include="layout :: footer"></div>
     <script th:src="@{/scriptcomp.js}"></script>
-    <!-- Scripts do Bootstrap -->
-    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
-</body>
-</html>
-
-<!-- Modal -->
-<div class="modal fade" id="modalcomp" tabindex="-1" aria-labelledby="modalcompLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalcompLabel">Excluir Componente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Deseja Excluir Componente?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnsim">Confirmar</button>
+    
+    <div class="modal fade" id="modalcomp" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Excluir Componente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Deseja excluir este componente?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnsim">Confirmar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
